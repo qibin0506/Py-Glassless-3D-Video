@@ -12,7 +12,7 @@
 1. 下载本项目
 2. 安装python: [https://blog.csdn.net/nerissa_lou/article/details/78300839](https://blog.csdn.net/nerissa_lou/article/details/78300839)
 3. 定位到项目目录，执行`pip install -r requirements.txt`
-4. 执行`python video_info.py -i test.mp4` 查看视频信息，输入：`video width: 544, video_height: 960`
+4. 执行`python video_info.py -i test.mp4` 查看视频信息。
 5. 执行`python main.py -i test.mp4 -o 3d.mp4`，等待制作完成。
 
 ## 详细参数说明
