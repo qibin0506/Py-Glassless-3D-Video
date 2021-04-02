@@ -8,17 +8,25 @@ output_file = None
 
 video_left = 20
 video_right = -30
-
 video_shift = 20
+
+show_anchor_point = False
 
 
 def process_frame(frame):
-    global video_left, video_right, video_shift
+    global video_left, video_right, video_shift, show_anchor_point
 
     right = frame[:, video_left:video_right]
     left = frame[:, video_left+video_shift:video_right+video_shift]
 
-    return np.concatenate((left, right), axis=1)
+    image = np.concatenate((left, right), axis=1)
+    # print(right.shape)
+
+    if show_anchor_point:
+        cv2.circle(image, (right.shape[1] + 20, 50), 10, color=(255, 0, 0), thickness=-1)
+        cv2.circle(image, (20, 50), 10, color=(0, 0, 255), thickness=-1)
+
+    return image
 
 
 def generate():
@@ -30,12 +38,12 @@ def generate():
 
 
 def main(argv):
-    global input_file, output_file, video_left, video_right, video_shift
+    global input_file, output_file, video_left, video_right, video_shift, show_anchor_point
 
     try:
-        opts, args = getopt.getopt(argv, "hi:o:l:r:s:", ["help", "input", "output", "left", "right", "shift"])
+        opts, args = getopt.getopt(argv, "hi:o:l:r:s:a", ["help", "input", "output", "left", "right", "shift", "anchor"])
     except getopt.GetoptError:
-        print('python main.py -i <inputfile> -o <outputfile> -l <left> -r <right> -s <shift>')
+        print('python main.py -i <inputfile> -o <outputfile> -l <left> -r <right> -s <shift> -a <anchor point>')
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
@@ -51,6 +59,8 @@ def main(argv):
             video_right = int(arg)
         elif opt in ('-s', '--shift'):
             video_shift = int(arg)
+        elif opt in ('-a', '--anchor'):
+            show_anchor_point = True
 
     if input_file is None:
         print("-i must be set.")
