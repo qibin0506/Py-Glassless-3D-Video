@@ -67,7 +67,7 @@ def main(argv):
         sys.exit()
 
     if output_file is None:
-        print("-0 must be set.")
+        print("-o must be set.")
         sys.exit()
 
     if video_left is None:
