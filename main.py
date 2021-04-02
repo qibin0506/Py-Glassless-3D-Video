@@ -47,7 +47,7 @@ def main(argv):
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            print('python main.py -i <inputfile> -o <outputfile> -l <left> -r <right> -s <shift>')
+            print('python main.py -i <inputfile> -o <outputfile> -l <left> -r <right> -s <shift> -a <anchor point>')
             sys.exit()
         elif opt in ('-i', '--input'):
             input_file = arg
