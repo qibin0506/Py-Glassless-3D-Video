@@ -16,8 +16,11 @@ show_anchor_point = False
 def process_frame(frame):
     global video_left, video_right, video_shift, show_anchor_point
 
-    right = frame[:, video_left:video_right]
-    left = frame[:, video_left+video_shift:video_right+video_shift]
+    # eg. image width=100
+    # left image is 20px-70px, width=50
+    # right image is 40px-90px, width=50
+    left = frame[:, video_left:video_right]
+    right = frame[:, video_left+video_shift:video_right+video_shift]
 
     image = np.concatenate((left, right), axis=1)
     # print(right.shape)
